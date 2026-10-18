@@ -1,0 +1,12 @@
+# 가상환경
+olist_analysis/
+
+# 원본 데이터 (Kaggle에서 직접 다운로드)
+data/
+
+# 파이썬 / 주피터 캐시
+__pycache__/
+.ipynb_checkpoints/
+
+# API 키 등 환경변수 (②단계 이후 사용)
+.env
