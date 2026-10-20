@@ -1,5 +1,6 @@
 # 가상환경
 olist_analysis/
+olist_venv/
 
 # 원본 데이터 (Kaggle에서 직접 다운로드)
 data/
