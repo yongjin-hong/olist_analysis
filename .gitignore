@@ -3,7 +3,7 @@ olist_analysis/
 olist_venv/
 
 # 원본 데이터 (Kaggle에서 직접 다운로드)
-data/
+data/raw/
 
 # 파이썬 / 주피터 캐시
 __pycache__/
