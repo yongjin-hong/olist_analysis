@@ -1,0 +1,34 @@
+# ② 프롬프트 4종 × 모델 2종 비교 실험 설정
+# 실행: python3 src/run_experiment.py --config configs/experiment.toml
+# 경로는 프로젝트 루트 기준
+
+# ── 데이터·결과 경로 ──
+[paths]
+pool = "data/processed/pool.csv"
+eval = "data/processed/eval.csv"
+embeddings = "data/processed/embeddings_qwen3-0.6b.npz"
+results_dir = "data/processed/results"
+
+# ── few-shot 예시 설정 ──
+[examples]
+k = 7                     # 고정·랜덤·RAG 모두 예시 7개
+fixed_shuffle_seed = 2026 # 고정 예시 순서
+random_base_seed = 2026   # 랜덤 예시: 리뷰마다 (기본 시드 + eval 행 번호)
+
+# ── 실행할 프롬프트 종류 (이 순서대로 실행) ──
+[run]
+prompt_types = ["zero_shot", "fixed", "random", "rag"]
+
+# ── 모델별 설정: 8GB 메모리라 한 모델로 4종을 다 돌린 뒤 다음 모델로 넘어감 ──
+[[models]]
+name = "qwen3.5:4b"
+timeout_sec = 120
+max_retries = 2
+[models.options]
+think = false             # thinking 모드 끔
+
+[[models]]
+name = "gemma4:e2b-it-qat"  # e4b는 8GB에서 CPU로 일부 넘어가 e2b로 교체
+timeout_sec = 180           # 입력 처리가 느려 넉넉하게
+max_retries = 2
+[models.options]
